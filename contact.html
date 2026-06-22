@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="index, follow" />
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg-0:#030810;--bg-1:#060D18;--bg-2:#0C1828;--bg-3:#142035;--bg-4:#1E3550;--accent:#4AA8C8;--accent-dim:#2E8FB5;--accent-light:#A8DCEF;--accent-glow:rgba(74,168,200,.12);--accent-glow-strong:rgba(74,168,200,.22);--white:#F0F4F8;--grey-1:#8A9BB0;--grey-2:#4A5A6A;--grey-3:#1E2D3D;--font-main:'Poppins',sans-serif;--font-body:'Inter',sans-serif;--nav-h:72px;--container:1400px;--gutter:clamp(24px,6vw,80px)}
+html{scroll-behavior:smooth;font-size:16px;height:100%}
+body{background:var(--bg-0);color:var(--white);font-family:var(--font-body);overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100%;display:flex;flex-direction:column}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:var(--accent-light)}
+img{max-width:100%;height:auto}
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 var(--gutter);transition:background .4s,border-color .4s;background:rgba(3,8,16,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(74,168,200,.08)}
+.nav-logo{font-family:var(--font-main);font-size:16px;font-weight:700;letter-spacing:.15em;color:var(--white);text-transform:uppercase;text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:clamp(20px,3vw,40px);list-style:none}
+.nav-links a{font-family:var(--font-main);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-1);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--white)}
+.nav-cta{font-family:var(--font-main);font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:10px 20px;border:1px solid var(--accent);border-radius:4px;color:var(--accent);text-decoration:none;transition:all .3s}
+.nav-cta:hover{background:var(--accent);color:var(--bg-0)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:1px;transition:all .3s}
+.nav-hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-hamburger.active span:nth-child(2){opacity:0}
+.nav-hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(max-width:768px){
+.nav-links{position:fixed;top:var(--nav-h);left:0;right:0;flex-direction:column;background:rgba(3,8,16,.98);backdrop-filter:blur(24px);padding:24px var(--gutter);gap:20px;border-bottom:1px solid rgba(74,168,200,.08);transform:translateY(-120%);opacity:0;transition:all .3s;pointer-events:none}
+.nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto}
+.nav-cta{display:none}
+.nav-hamburger{display:flex}
+}
+.footer{border-top:1px solid rgba(74,168,200,.08);padding:60px var(--gutter) 40px;margin-top:auto}
+.footer-inner{max-width:var(--container);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.footer-brand{font-family:var(--font-main);font-size:13px;font-weight:600;letter-spacing:.12em;color:var(--grey-1)}
+.footer-links{display:flex;gap:32px}
+.footer-links a{font-size:12px;font-weight:500;color:var(--grey-1);letter-spacing:.05em}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{width:100%;text-align:center;font-size:11px;color:var(--grey-2);margin-top:24px;padding-top:16px;border-top:1px solid var(--grey-3)}
+.page{padding:calc(var(--nav-h) + 60px) var(--gutter) 80px;max-width:var(--container);margin:0 auto;width:100%;flex:1}
+.page h1{font-family:var(--font-main);font-size:clamp(28px,3.2vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:16px}
+.page h2{font-family:var(--font-main);font-size:clamp(20px,2.2vw,32px);font-weight:700;letter-spacing:-.01em;line-height:1.2;margin:48px 0 16px}
+.page p{font-size:15px;line-height:1.7;color:var(--grey-1);margin-bottom:16px;max-width:680px}</style>
+<title>Contact — Robotist | Let's Talk Robotics</title>
+<meta name="description" content="Reach Robotist — email Robert or Lareesa, or send a message. Sydney-based with direct China supply access." />
+<link rel="canonical" href="https://www.robotist.com.au/contact.html" />
+<meta property="og:title" content="Contact — Robotist | Let's Talk Robotics" />
+<meta property="og:description" content="Reach Robotist — email Robert or Lareesa, or send a message. Sydney-based with direct China supply access." />
+<meta property="og:url" content="https://www.robotist.com.au/contact.html" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+<nav class="nav" id="mainNav"><a href="/" class="nav-logo">Robot<span>ist</span></a><ul class="nav-links"><li><a href="/">Home</a></li><li><a href="/">Catalogue</a></li><li><a href="/about.html">About</a></li><li><a href="/contact.html">Contact</a></li></ul><a href="mailto:robert@robotist.com.au" class="nav-cta">Book Consultation</a><button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav><style>.cg{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:100px var(--gutter) 80px;max-width:900px;margin:0 auto}.ci{display:flex;flex-direction:column;gap:20px}.cc{background:var(--bg-1);border:1px solid rgba(74,168,200,.08);border-radius:8px;padding:24px}.cc .ico{font-size:24px;margin-bottom:8px}.cc h3{font-family:var(--font-main);font-size:14px;font-weight:700;margin-bottom:4px}.cc .sub{font-size:12px;color:var(--grey-1);margin-bottom:8px}.cc a{font-size:14px;font-weight:500;word-break:break-all}.cf h2{font-family:var(--font-main);font-size:clamp(24px,2.4vw,36px);font-weight:700;letter-spacing:-.02em;margin-bottom:8px}.cf .lead{font-size:15px;color:var(--grey-1);line-height:1.6;margin-bottom:32px;max-width:460px}.fg{margin-bottom:20px}.fg label{display:block;font-size:12px;font-weight:600;color:var(--grey-1);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}.fg input,.fg textarea,.fg select{width:100%;padding:12px 16px;background:var(--bg-1);border:1px solid rgba(74,168,200,.12);border-radius:6px;color:var(--white);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color .2s}.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--accent)}.fg textarea{resize:vertical;min-height:120px}.fbtn{width:100%;padding:14px;background:var(--accent);color:var(--bg-0);border:none;border-radius:6px;font-family:var(--font-main);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s}.fbtn:hover{background:var(--accent-light)}@media(max-width:768px){.cg{grid-template-columns:1fr}}</style><div class="cg"><div class="ci"><div class="cc"><div class="ico">&#x1F4E7;</div><h3>Email Robert &mdash; CEO</h3><div class="sub">Sales, partnerships, investor relations, general inquiries</div><a href="mailto:robert@robotist.com.au">robert@robotist.com.au</a></div><div class="cc"><div class="ico">&#x1F4E7;</div><h3>Email Lareesa &mdash; CMO</h3><div class="sub">Brand partnerships, marketing, media, creative inquiries</div><a href="mailto:lareesa@robotist.com.au">lareesa@robotist.com.au</a></div><div class="cc"><div class="ico">&#x1F310;</div><h3>LinkedIn</h3><div class="sub">Company updates, deployment stories, industry insights</div><a href="https://www.linkedin.com/company/robotist" target="_blank">linkedin.com/company/robotist</a></div><div class="cc"><div class="ico">&#x1F4CD;</div><h3>Sydney, Australia</h3><div class="sub">Based in Sydney with direct supply chain access to Shanghai</div></div></div><div class="cf"><h2>Let's talk robotics.</h2><p class="lead">Whether you're looking to buy, rent, or just explore &mdash; send us a message and we'll respond within 4 business hours.</p><form action="mailto:robert@robotist.com.au" method="get" enctype="text/plain"><div class="fg"><label for="name">Your Name</label><input type="text" id="name" name="name" required placeholder="e.g. John Smith" /></div><div class="fg"><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="john@company.com.au" /></div><div class="fg"><label for="interest">I'm interested in</label><select id="interest" name="interest"><option value="">Select an option</option><option value="purchase">Buying a robot</option><option value="rental">Renting a robot</option><option value="investment">Investment opportunity</option><option value="partnership">Partnership</option><option value="general">General inquiry</option></select></div><div class="fg"><label for="message">Message</label><textarea id="message" name="message" required placeholder="Tell us about your use case, timeline, and specific robots you're interested in..."></textarea></div><button type="submit" class="fbtn">Send Message</button></form></div></div><footer class="footer"><div class="footer-inner"><div class="footer-brand">Robot<span style="color:var(--accent)">ist</span></div><div class="footer-links"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="https://www.linkedin.com/company/robotist" target="_blank">LinkedIn</a></div><div class="footer-copy">&copy; 2026 Robotist Pty Ltd &middot; Sydney, Australia</div></div></footer><script>(function(){var n=document.getElementById("mainNav");if(!n)return;var h=n.querySelector(".nav-hamburger");var l=n.querySelector(".nav-links");if(h){h.addEventListener("click",function(e){e.preventDefault();l.classList.toggle("open");h.classList.toggle("active")})}l.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){l.classList.remove("open");h.classList.remove("active")})})})();</script>
+</body>
+</html>
