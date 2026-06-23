@@ -130,14 +130,10 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" as="style" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
 /* ═══════════════════════════════════════════════
    ROBOTIST — DESIGN SYSTEM
-   Brand: Ice Blue · Poppins · Cold·Precise·Infinite
+   Brand: Ice Blue · System · Cold·Precise·Infinite
    ═══════════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -157,8 +153,8 @@
   --grey-1: #8A9BB0;
   --grey-2: #4A5A6A;
   --grey-3: #1E2D3D;
-  --font-main: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-main: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --nav-h: 72px;
   --section-pad: clamp(100px, 12vw, 160px);
   --container: 1400px;
@@ -333,71 +329,10 @@ body::after {
   mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 0%, transparent 70%);
 }
 
-/* ── SPLINE SCENE ────────────────────────────────────────────────────────────────────────
-   The div is position:fixed, 110vh tall, anchored to top:0.
-   The viewport only shows the top 100vh of it — the bottom 10vh
-   (where the Spline watermark logo lives) is permanently below
-   the fold and never enters the viewport.
-   Subsequent page sections scroll over this fixed layer naturally.
-   ──────────────────────────────────────────────────────────────────────── */
-.spline-fixed {
-  position: fixed;         /* stays pinned — sections scroll over it */
-  top: 0;
-  right: 0;
-  width: 70vw;
-  height: 110vh;           /* 110vh tall: logo lives in the bottom 10vh */
-  z-index: 0;              /* behind hero content and all subsequent sections */
-  pointer-events: auto;
-  transition: opacity 0.3s ease;
-  overflow: visible;       /* no clip needed — bottom 10vh is below viewport */
-}
-
-/* The viewer fills the fixed div exactly */
-.spline-fixed spline-viewer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;            /* fills the 110vh fixed div */
-  display: block;
-  --background-color: transparent;
-}
-
-/* Left-edge feather — wide eased gradient to eliminate the lighting cliff.
-   Multi-stop curve mimics a perceptual ease-out so the fade feels natural
-   rather than linear. Width is generous (35vw) to fully swallow the shadow. */
-.spline-fixed::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 35vw;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    var(--bg-0)        0%,
-    var(--bg-0)        8%,
-    rgba(3,8,16,0.95)  18%,
-    rgba(3,8,16,0.82)  28%,
-    rgba(3,8,16,0.60)  40%,
-    rgba(3,8,16,0.35)  55%,
-    rgba(3,8,16,0.12)  72%,
-    transparent        100%
-  );
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* No ::after strip needed — the bottom 10vh of the fixed div
-   is permanently below the 100vh viewport boundary.
-   The logo never enters the visible area. */
-
 .hero-inner {
-  position: fixed;         /* pins hero text to viewport alongside the scene */
+  position: relative;
   z-index: 3;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0 var(--gutter) 80px; /* 80px from bottom on desktop */
+  padding: 0 var(--gutter) 80px;
   display: flex;
   align-items: flex-end;
 }
@@ -590,8 +525,6 @@ body::after {
   display: block;
   margin-top: 4px;
 }
-
-/* hero-right removed — Spline is now .spline-fixed absolute layer */
 
 /* ══════════════════════════════════════════════
    TICKER STRIP
@@ -2644,7 +2577,6 @@ body::after {
 /* ══ DESKTOP (1100–1400px) ══ */
 @media (max-width: 1400px) and (min-width: 1101px) {
   .hero-left { width: min(400px, 30vw); }
-  .spline-fixed { width: 68vw; }
 }
 
 /* ── TABLET LANDSCAPE (900–1100px) ── */
@@ -2654,44 +2586,13 @@ body::after {
   .traction-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-inner { grid-template-columns: 1fr 1fr; gap: 48px; }
   .hero-left { width: min(360px, 38vw); }
-  .spline-fixed { width: 62vw; }
-  .spline-fixed::before { width: 160px; }
 }
 
 /* ══ TABLET / NARROW DESKTOP (640–900px) ══ */
 @media (max-width: 900px) {
-  /* Hero — Spline centered, text at bottom 1/3 */
   .hero { height: 100svh; min-height: 600px; }
 
-  .spline-fixed {
-    position: fixed;
-    top: 0; left: 0; right: auto;
-    width: 100vw;
-    height: 110vh;           /* 110vh fixed: logo below viewport fold */
-    overflow: visible;
-    z-index: 0;
-    transform: none;
-  }
-  .spline-fixed spline-viewer {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;            /* fills the 110vh fixed div */
-  }
-  .spline-fixed::before {
-    /* Bottom gradient fade — covers bottom 40% of visible area */
-    background: linear-gradient(to top, var(--bg-0) 0%, rgba(3,8,16,0.7) 30%, transparent 60%);
-    width: 100%;
-    height: 60%;
-    top: auto; bottom: 0; left: 0;
-    position: absolute;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  /* Hero inner: fixed at bottom of viewport */
   .hero-inner {
-    position: fixed;
     padding-bottom: 40px;
   }
   .hero-left {
@@ -2745,35 +2646,9 @@ body::after {
 @media (max-width: 640px) {
   :root { --gutter: 20px; --section-pad: 80px; }
 
-  /* Hero — Spline full-screen, text at bottom */
   .hero { height: 100svh; min-height: 500px; }
-  .spline-fixed {
-    position: fixed;
-    top: 0; left: 0; right: auto;
-    width: 100vw;
-    height: 110vh;           /* 110vh fixed: logo below viewport fold */
-    overflow: visible;
-    z-index: 0;
-    transform: none;
-  }
-  .spline-fixed spline-viewer {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;            /* fills the 110vh fixed div */
-  }
-  .spline-fixed::before {
-    background: linear-gradient(to top, var(--bg-0) 0%, rgba(3,8,16,0.8) 35%, transparent 65%);
-    width: 100%;
-    height: 70%;
-    top: auto; bottom: 0; left: 0;
-    position: absolute;
-    z-index: 2;
-    pointer-events: none;
-  }
 
   .hero-inner {
-    position: fixed;
     padding-bottom: 28px;
   }
   .hero-left {
@@ -2882,9 +2757,6 @@ body::after {
 }
 
 </style>
-  <!-- Spline Viewer runtime -->
-  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
-
 </head>
 <body>
 
@@ -2914,14 +2786,6 @@ body::after {
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-
-  <!-- Spline 3D scene — right 70vw, fades on scroll -->
-  <div class="spline-fixed" id="splineScene">
-    <spline-viewer
-      url="https://prod.spline.design/gy2mjJ1GYYEkmdsm/scene.splinecode"
-      style="background:transparent;"
-    ></spline-viewer>
-  </div>
 
   <div class="hero-inner">
     <div class="hero-left">
@@ -3862,33 +3726,11 @@ id="catalogue">
      JAVASCRIPT
      ══════════════════════════════════════════════ -->
 <script>
-// ── NAV SCROLL + SPLINE FADE ON SCROLL ──
+// ── NAV SCROLL ──
 const nav = document.getElementById('mainNav');
-const splineScene = document.getElementById('splineScene');
-const heroSection = document.getElementById('hero');
-const heroInner = document.querySelector('.hero-inner');
 
 window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  nav.classList.toggle('scrolled', scrollY > 60);
-
-  // Fade Spline + hero content together as user scrolls through hero
-  if (splineScene) {
-    const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
-    // Start fading at 20% scroll through hero, fully gone at 70%
-    const fadeStart = heroH * 0.2;
-    const fadeEnd   = heroH * 0.7;
-    const opacity = scrollY <= fadeStart ? 1
-      : scrollY >= fadeEnd ? 0
-      : 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
-    splineScene.style.opacity = opacity;
-    splineScene.style.pointerEvents = opacity < 0.05 ? 'none' : 'auto';
-    // Hero text fades in sync with the scene
-    if (heroInner) {
-      heroInner.style.opacity = opacity;
-      heroInner.style.pointerEvents = opacity < 0.05 ? 'none' : 'auto';
-    }
-  }
+  nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
 // ── SCROLL REVEAL ──
