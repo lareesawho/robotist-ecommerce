@@ -1081,22 +1081,22 @@ body::after {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 20px;
+  padding: 0;
 }
 
 .robot-card-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   display: block;
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Images display at natural ratio — no forced cropping */
-.robot-card.featured .robot-card-img-wrap { /* natural ratio */ }
-.robot-card.mid .robot-card-img-wrap { /* natural ratio */ }
-.robot-card.small .robot-card-img-wrap { /* natural ratio */ }
+/* Consistent aspect ratios — every card fills its grid cell */
+.robot-card.featured .robot-card-img-wrap { aspect-ratio: 4/5; }
+.robot-card.mid .robot-card-img-wrap { aspect-ratio: 1/1; }
+.robot-card.small .robot-card-img-wrap { aspect-ratio: 1/1; }
 
 /* Empty block removed */
 
