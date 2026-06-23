@@ -122,20 +122,14 @@
       "name": "How long does delivery take?",
       "acceptedAnswer": { "@type": "Answer", "text": "Most robots are available for delivery within 8–12 weeks from our Shanghai supply chain. Robotist manages all import compliance, customs clearance, and last-mile delivery to your site in Australia." }
     },
-    {
-      "@type": "Question",
-      "name": "Is Robotist accepting investors?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Robotist is currently raising an angel round. To receive the investor pack including financials, cap table, and pitch deck, email robert@robotist.com.au." }
-    }
   ]
 }
 </script>
 <style>
 /* ═══════════════════════════════════════════════
-   ROBOTIST — DESIGN SYSTEM
-   Brand: Ice Blue · System · Cold·Precise·Infinite
+   ROBOTIST — DESIGN SYSTEM (NO CDN)
+   Fonts: system stack only. No external dependencies.
    ═══════════════════════════════════════════════ */
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -153,8 +147,8 @@
   --grey-1: #8A9BB0;
   --grey-2: #4A5A6A;
   --grey-3: #1E2D3D;
-  --font-main: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --nav-h: 72px;
   --section-pad: clamp(100px, 12vw, 160px);
   --container: 1400px;
@@ -212,13 +206,14 @@ body::after {
 }
 
 .nav-logo {
-  font-family: var(--font-main);
-  font-weight: 500;
-  font-size: 17px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--accent);
+  display: flex;
+  align-items: center;
   text-decoration: none;
+}
+.nav-logo img {
+  height: 24px;
+  width: auto;
+  display: block;
 }
 
 .nav-links {
@@ -329,10 +324,71 @@ body::after {
   mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 0%, transparent 70%);
 }
 
+/* ── SPLINE SCENE ────────────────────────────────────────────────────────────────────────
+   The div is position:fixed, 110vh tall, anchored to top:0.
+   The viewport only shows the top 100vh of it — the bottom 10vh
+   (where the Spline watermark logo lives) is permanently below
+   the fold and never enters the viewport.
+   Subsequent page sections scroll over this fixed layer naturally.
+   ──────────────────────────────────────────────────────────────────────── */
+.spline-fixed {
+  position: fixed;         /* stays pinned — sections scroll over it */
+  top: 0;
+  right: 0;
+  width: 70vw;
+  height: 110vh;           /* 110vh tall: logo lives in the bottom 10vh */
+  z-index: 0;              /* behind hero content and all subsequent sections */
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+  overflow: visible;       /* no clip needed — bottom 10vh is below viewport */
+}
+
+/* The viewer fills the fixed div exactly */
+.spline-fixed spline-viewer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;            /* fills the 110vh fixed div */
+  display: block;
+  --background-color: transparent;
+}
+
+/* Left-edge feather — wide eased gradient to eliminate the lighting cliff.
+   Multi-stop curve mimics a perceptual ease-out so the fade feels natural
+   rather than linear. Width is generous (35vw) to fully swallow the shadow. */
+.spline-fixed::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 35vw;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    var(--bg-0)        0%,
+    var(--bg-0)        8%,
+    rgba(3,8,16,0.95)  18%,
+    rgba(3,8,16,0.82)  28%,
+    rgba(3,8,16,0.60)  40%,
+    rgba(3,8,16,0.35)  55%,
+    rgba(3,8,16,0.12)  72%,
+    transparent        100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* No ::after strip needed — the bottom 10vh of the fixed div
+   is permanently below the 100vh viewport boundary.
+   The logo never enters the visible area. */
+
 .hero-inner {
-  position: relative;
+  position: fixed;         /* pins hero text to viewport alongside the scene */
   z-index: 3;
-  padding: 0 var(--gutter) 80px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 var(--gutter) 80px; /* 80px from bottom on desktop */
   display: flex;
   align-items: flex-end;
 }
@@ -525,6 +581,8 @@ body::after {
   display: block;
   margin-top: 4px;
 }
+
+/* hero-right removed — Spline is now .spline-fixed absolute layer */
 
 /* ══════════════════════════════════════════════
    TICKER STRIP
@@ -1035,18 +1093,18 @@ body::after {
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Responsive image heights — portrait for featured (humanoids are tall),
-   square for mid/small cards */
-.robot-card.featured .robot-card-img-wrap { aspect-ratio: 3/4; }
-.robot-card.mid .robot-card-img-wrap { aspect-ratio: 1/1; }
-.robot-card.small .robot-card-img-wrap { aspect-ratio: 1/1; }
+/* Images display at natural ratio — no forced cropping */
+.robot-card.featured .robot-card-img-wrap { /* natural ratio */ }
+.robot-card.mid .robot-card-img-wrap { /* natural ratio */ }
+.robot-card.small .robot-card-img-wrap { /* natural ratio */ }
 
-/* Per-image object-position overrides for off-center originals */
+/* Empty block removed */
+
 
 
 
 @media (max-width: 640px) {
-  .robot-card.featured .robot-card-img-wrap { aspect-ratio: 3/4; }
+  /* no forced aspect ratios */
 }
 
 .robot-card:hover .robot-card-img { transform: scale(1.04); }
@@ -1118,7 +1176,7 @@ body::after {
 
 .robot-card.featured .robot-overlay-name { font-size: 20px; }
 
-.robot-overlay-price {
+.robot-overlay-price { display: none; /* prices hidden per user request */
   font-family: var(--font-main);
   font-size: 12px;
   font-weight: 500;
@@ -1126,7 +1184,7 @@ body::after {
   letter-spacing: 0.04em;
 }
 
-.robot-card.featured .robot-overlay-price { font-size: 15px; }
+.robot-card.featured .robot-overlay-price { display: none; /* prices hidden per user request */ font-size: 15px; }
 
 .robot-overlay-desc {
   font-family: var(--font-body);
@@ -1209,14 +1267,14 @@ body::after {
 
 .robot-card.featured .robot-info-name { font-size: 15px; }
 
-.robot-info-price {
+.robot-info-price { display: none; /* prices hidden per user request */
   font-family: var(--font-main);
   font-size: 11px;
   font-weight: 500;
   color: var(--accent);
 }
 
-.robot-card.featured .robot-info-price { font-size: 13px; }
+.robot-card.featured .robot-info-price { display: none; /* prices hidden per user request */ font-size: 13px; }
 
 /* ══════════════════════════════════════════════
    WHY ROBOTIST
@@ -2577,6 +2635,7 @@ body::after {
 /* ══ DESKTOP (1100–1400px) ══ */
 @media (max-width: 1400px) and (min-width: 1101px) {
   .hero-left { width: min(400px, 30vw); }
+  .spline-fixed { width: 68vw; }
 }
 
 /* ── TABLET LANDSCAPE (900–1100px) ── */
@@ -2586,13 +2645,44 @@ body::after {
   .traction-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-inner { grid-template-columns: 1fr 1fr; gap: 48px; }
   .hero-left { width: min(360px, 38vw); }
+  .spline-fixed { width: 62vw; }
+  .spline-fixed::before { width: 160px; }
 }
 
 /* ══ TABLET / NARROW DESKTOP (640–900px) ══ */
 @media (max-width: 900px) {
+  /* Hero — Spline centered, text at bottom 1/3 */
   .hero { height: 100svh; min-height: 600px; }
 
+  .spline-fixed {
+    position: fixed;
+    top: 0; left: 0; right: auto;
+    width: 100vw;
+    height: 110vh;           /* 110vh fixed: logo below viewport fold */
+    overflow: visible;
+    z-index: 0;
+    transform: none;
+  }
+  .spline-fixed spline-viewer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;            /* fills the 110vh fixed div */
+  }
+  .spline-fixed::before {
+    /* Bottom gradient fade — covers bottom 40% of visible area */
+    background: linear-gradient(to top, var(--bg-0) 0%, rgba(3,8,16,0.7) 30%, transparent 60%);
+    width: 100%;
+    height: 60%;
+    top: auto; bottom: 0; left: 0;
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Hero inner: fixed at bottom of viewport */
   .hero-inner {
+    position: fixed;
     padding-bottom: 40px;
   }
   .hero-left {
@@ -2646,9 +2736,35 @@ body::after {
 @media (max-width: 640px) {
   :root { --gutter: 20px; --section-pad: 80px; }
 
+  /* Hero — Spline full-screen, text at bottom */
   .hero { height: 100svh; min-height: 500px; }
+  .spline-fixed {
+    position: fixed;
+    top: 0; left: 0; right: auto;
+    width: 100vw;
+    height: 110vh;           /* 110vh fixed: logo below viewport fold */
+    overflow: visible;
+    z-index: 0;
+    transform: none;
+  }
+  .spline-fixed spline-viewer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;            /* fills the 110vh fixed div */
+  }
+  .spline-fixed::before {
+    background: linear-gradient(to top, var(--bg-0) 0%, rgba(3,8,16,0.8) 35%, transparent 65%);
+    width: 100%;
+    height: 70%;
+    top: auto; bottom: 0; left: 0;
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+  }
 
   .hero-inner {
+    position: fixed;
     padding-bottom: 28px;
   }
   .hero-left {
@@ -2757,6 +2873,9 @@ body::after {
 }
 
 </style>
+  <!-- Spline Viewer runtime -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+
 </head>
 <body>
 
@@ -2764,17 +2883,15 @@ body::after {
      NAVIGATION
      ══════════════════════════════════════════════ -->
 <nav class="nav" id="mainNav">
-  <a href="#" class="nav-logo">Robotist</a>
+  <a href="#" class="nav-logo"><img src="images/logo.svg" alt="Robotist" style="height:28px;width:auto;"></a>
   <ul class="nav-links">
     <li><a href="#catalogue">Catalogue</a></li>
     <li><a href="#why">Why Robotist</a></li>
-    <li><a href="#traction">Traction</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="compare.html">Compare</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="mailto:robert@robotist.com.au" class="nav-cta">Book Consultation</a>
+  <a href="mailto:robert@robotist.com.au" class="nav-cta">Get Started</a>
   <button class="nav-hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -2786,6 +2903,14 @@ body::after {
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+
+  <!-- Spline 3D scene — right 70vw, fades on scroll -->
+  <div class="spline-fixed" id="splineScene">
+    <spline-viewer
+      url="https://prod.spline.design/gy2mjJ1GYYEkmdsm/scene.splinecode"
+      style="background:transparent;"
+    ></spline-viewer>
+  </div>
 
   <div class="hero-inner">
     <div class="hero-left">
@@ -2799,7 +2924,7 @@ body::after {
       </h1>
       <div class="hero-actions">
         <a href="#catalogue" class="btn-primary">Explore Catalogue</a>
-        <a href="business-plan.html" class="btn-text">View Business Plan</a>
+        <a href="contact.html" class="btn-text">Get in Touch</a>
       </div>
       <!-- Stats removed — shown in Vision section below -->
     </div>
@@ -2941,41 +3066,6 @@ body::after {
 <!-- ══════════════════════════════════════════════
      VISION
      ══════════════════════════════════════════════ -->
-<section class="vision" id="vision">
-  <div class="vision-inner">
-    <div class="vision-left">
-      <div class="section-eyebrow reveal">Market Context</div>
-      <div class="vision-stat reveal reveal-delay-1">
-        <span class="vision-stat-num">$38B</span>
-        <span class="vision-stat-label">Humanoid robot TAM by 2035</span>
-      </div>
-      <div class="vision-stat reveal reveal-delay-2">
-        <span class="vision-stat-num">$74.56B</span>
-        <span class="vision-stat-label">Global robotics system integration market 2024</span>
-      </div>
-      <div class="vision-stat reveal reveal-delay-3">
-        <span class="vision-stat-num">2026</span>
-        <span class="vision-stat-label">Year of commercial deployment</span>
-      </div>
-    </div>
-    <div class="vision-right">
-      <p class="vision-lead reveal">
-        Robotist connects Australian businesses with the world's most advanced robotics — curated, compliant, and supported from day one.
-      </p>
-      <p class="vision-manifesto reveal reveal-delay-1">
-        Robots are no longer coming.<br/>
-        <em>They are here.</em>
-      </p>
-      <p class="vision-statement reveal reveal-delay-2">
-        Robotist is the bridge between world-class hardware and Australian business readiness.
-      </p>
-      <p class="vision-body reveal reveal-delay-3">
-        We source directly from China's leading robotics manufacturers — the same factories supplying Tesla, Amazon, and the world's largest logistics operators. Our broker model eliminates the middleman, delivering enterprise-grade machines at accessible price points, with full integration support and ongoing maintenance.
-      </p>
-    </div>
-  </div>
-</section>
-
 <!-- ══════════════════════════════════════════════
      CATALOGUE
      ══════════════════════════════════════════════ -->
@@ -3403,73 +3493,6 @@ id="catalogue">
 </section>
 
 <!-- ══════════════════════════════════════════════
-     09 — TRACTION
-     ══════════════════════════════════════════════ -->
-<section class="traction" id="traction">
-  <div class="traction-inner">
-    <div class="traction-header reveal">
-      <div class="section-eyebrow">Real Deployments</div>
-      <h2 class="traction-title">Robots already working for businesses like yours.</h2>
-    </div>
-
-    <!-- Traction — customer benefit framing -->
-    <div class="traction-grid">
-      <div class="traction-item reveal">
-        <div class="traction-item-label">For Hospitality Operators</div>
-        <div class="traction-item-title">Cut front-desk labour costs without cutting service quality</div>
-        <div class="traction-item-body">Hotels using Robotist-deployed robots handle check-in, concierge queries, and room service delivery with machines that never call in sick. We're actively deploying across hospitality — more clients in discussion.</div>
-      </div>
-      <div class="traction-item reveal reveal-delay-1">
-        <div class="traction-item-label">For Logistics &amp; Facilities</div>
-        <div class="traction-item-title">Enterprise-grade robots at accessible price points</div>
-        <div class="traction-item-body">We source directly from the same factories supplying Tesla and Amazon — removing the middleman markup. Businesses get enterprise hardware with full integration support, not a box dropped at the loading dock.</div>
-      </div>
-      <div class="traction-item reveal reveal-delay-2">
-        <div class="traction-item-label">For Any Business Ready to Deploy</div>
-        <div class="traction-item-title">13 robots. 4 categories. One platform to find the right fit.</div>
-        <div class="traction-item-body">Whether you need a humanoid for your showroom, a delivery bot for your warehouse, or a security unit for your facility — Robotist matches your use case to the right machine and handles everything from import to go-live.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════
-     FAQ
-     ══════════════════════════════════════════════ -->
-<section class="faq" id="faq">
-  <div class="container">
-    <div class="section-eyebrow reveal">Common Questions</div>
-    <h2 class="section-h2 reveal">Everything you need to know<br>before you deploy.</h2>
-    <div class="faq-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:40px;">
-      <div class="faq-card reveal" style="background:var(--bg-2);border:1px solid var(--border, rgba(255,255,255,0.06));border-radius:8px;padding:24px;">
-        <div style="font-weight:600;font-size:14px;color:var(--white);margin-bottom:8px;">How long does delivery take?</div>
-        <p style="font-size:13px;color:var(--text-secondary,#8A9BB0);line-height:1.6;">Most robots ship within 8–12 weeks from Shanghai. That covers manufacturing, shipping, import clearance, and last-mile delivery. We manage the full import and compliance process.</p>
-      </div>
-      <div class="faq-card reveal reveal-delay-1" style="background:var(--bg-2);border:1px solid var(--border, rgba(255,255,255,0.06));border-radius:8px;padding:24px;">
-        <div style="font-weight:600;font-size:14px;color:var(--white);margin-bottom:8px;">Can I rent or trial before buying?</div>
-        <p style="font-size:13px;color:var(--text-secondary,#8A9BB0);line-height:1.6;">Yes. We facilitate rentals and trials for businesses that want to test before committing. Structures are negotiated case-by-case based on robot type, duration, and location.</p>
-      </div>
-      <div class="faq-card reveal reveal-delay-2" style="background:var(--bg-2);border:1px solid var(--border, rgba(255,255,255,0.06));border-radius:8px;padding:24px;">
-        <div style="font-weight:600;font-size:14px;color:var(--white);margin-bottom:8px;">What support is included after purchase?</div>
-        <p style="font-size:13px;color:var(--text-secondary,#8A9BB0);line-height:1.6;">Every deployment includes site assessment, import compliance, installation, staff training, and a 12-month support contract. Three support tiers available — Essential, Priority, and Premium Command.</p>
-      </div>
-      <div class="faq-card reveal reveal-delay-1" style="background:var(--bg-2);border:1px solid var(--border, rgba(255,255,255,0.06));border-radius:8px;padding:24px;">
-        <div style="font-weight:600;font-size:14px;color:var(--white);margin-bottom:8px;">Can I see the robots before buying?</div>
-        <p style="font-size:13px;color:var(--text-secondary,#8A9BB0);line-height:1.6;">We run private demonstrations at our Sydney office for serious enquiries. Email robert@robotist.com.au to arrange a session. See our <a href="/reviews/pndbotics-adam.html" style="color:var(--accent);">Robotist Reviews</a> for hands-on testing notes.</p>
-      </div>
-      <div class="faq-card reveal reveal-delay-2" style="background:var(--bg-2);border:1px solid var(--border, rgba(255,255,255,0.06));border-radius:8px;padding:24px;">
-        <div style="font-weight:600;font-size:14px;color:var(--white);margin-bottom:8px;">Do you handle Australian compliance?</div>
-        <p style="font-size:13px;color:var(--text-secondary,#8A9BB0);line-height:1.6;">Yes — we handle ABF customs, AS/NZS safety compliance, state workplace signoffs, and TGA facilitation for medical robots. You focus on the use case; we handle the paperwork.</p>
-      </div>
-      <div class="faq-card reveal reveal-delay-1" style="background:var(--bg-2);border:1px solid var(--border, rgba(255,255,255,0.06));border-radius:8px;padding:24px;">
-        <div style="font-weight:600;font-size:14px;color:var(--white);margin-bottom:8px;">How do I compare robots?</div>
-        <p style="font-size:13px;color:var(--text-secondary,#8A9BB0);line-height:1.6;">Use our <a href="/compare.html" style="color:var(--accent);">Product Comparison tool</a> — all 13 robots side-by-side with specs, pricing, and use cases. Filter by category to narrow your options.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════
      LEADERSHIP
      ══════════════════════════════════════════════ -->
 <section class="leadership" id="leadership">
@@ -3624,7 +3647,6 @@ id="catalogue">
         <li><a href="#traction">Traction</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#leadership">Team</a></li>
-        <li><a href="compare.html">Compare</a></li>
         <li><a href="contact.html">Contact Us</a></li>
       </ul>
     </div>
@@ -3726,11 +3748,33 @@ id="catalogue">
      JAVASCRIPT
      ══════════════════════════════════════════════ -->
 <script>
-// ── NAV SCROLL ──
+// ── NAV SCROLL + SPLINE FADE ON SCROLL ──
 const nav = document.getElementById('mainNav');
+const splineScene = document.getElementById('splineScene');
+const heroSection = document.getElementById('hero');
+const heroInner = document.querySelector('.hero-inner');
 
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
+  const scrollY = window.scrollY;
+  nav.classList.toggle('scrolled', scrollY > 60);
+
+  // Fade Spline + hero content together as user scrolls through hero
+  if (splineScene) {
+    const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
+    // Start fading at 20% scroll through hero, fully gone at 70%
+    const fadeStart = heroH * 0.2;
+    const fadeEnd   = heroH * 0.7;
+    const opacity = scrollY <= fadeStart ? 1
+      : scrollY >= fadeEnd ? 0
+      : 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
+    splineScene.style.opacity = opacity;
+    splineScene.style.pointerEvents = opacity < 0.05 ? 'none' : 'auto';
+    // Hero text fades in sync with the scene
+    if (heroInner) {
+      heroInner.style.opacity = opacity;
+      heroInner.style.pointerEvents = opacity < 0.05 ? 'none' : 'auto';
+    }
+  }
 }, { passive: true });
 
 // ── SCROLL REVEAL ──
@@ -3865,8 +3909,7 @@ const knowledgeBase = {
   greetings:   ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'howdy', 'sup'],
   catalogue:   ['robot', 'catalogue', 'catalog', 'product', 'machine', 'buy', 'purchase', 'sell', 'what do you', 'what robots'],
   pricing:     ['price', 'cost', 'how much', 'aud', 'dollar', 'fee', 'rate', 'expensive', 'cheap', 'afford', 'budget'],
-  invest:      ['invest', 'investor', 'funding', 'raise', 'equity', 'angel', 'round', 'capital', 'share', 'stake', 'return', 'roi', 'valuation'],
-  hospitality: ['hotel', 'hospitality', 'restaurant', 'cafe', 'food', 'beverage', 'concierge', 'check-in', 'guest', 'front desk'],
+  hospitality: ['hotel', 'hospitality', 'restaurant', 'cafe', 'food', 'beverage', 'concierge', 'check-in', 'guest', 'front desk', 'primus'],
   logistics:   ['logistics', 'warehouse', 'inspection', 'security patrol', 'payload', 'cargo', 'dispatch', 'magicdog', 'y1', 'genisom', 'm1', 'isage', 'sageman'],
   security:    ['security', 'patrol', 'magicdog', 'y1', 'genisom', 'm1', 'inspect', 'surveillance', 'camera', 'thermal', 'guard', 'quadruped'],
   medical:     ['medical', 'hospital', 'clinic', 'tga', 'health', 'fourier', 'gr-3', 'isage', 'sageman', 'care', 'healthcare'],
@@ -3877,7 +3920,6 @@ const knowledgeBase = {
   delivery:    ['delivery time', 'lead time', 'how long', 'when', 'timeline', 'weeks', 'months', 'shipping', 'arrive'],
   compliance:  ['compliance', 'customs', 'import', 'regulation', 'legal', 'permit', 'certif', 'approval', 'clearance'],
   contact:     ['contact', 'email', 'phone', 'call', 'speak', 'human', 'team', 'talk', 'reach', 'get in touch'],
-  services:    ['service', 'integration', 'install', 'maintenance', 'support', 'training', 'deploy', 'setup', 'after-sales', 'package', 'tier'],
   demo:        ['demo', 'demonstration', 'see', 'watch', 'video', 'showcase', 'event', 'show me'],
   about:       ['about', 'who are you', 'who is robotist', 'company', 'founded', 'sydney', 'australia', 'located', 'where are you'],
 };
@@ -3886,8 +3928,8 @@ const responses = {
   greetings:   "Hey! Great to have you here. I'm Maxx — Robotist's in-house robot expert. I can walk you through our catalogue, explain how deployment works, or answer any questions about bringing robots into your business. What are you looking for?",
   catalogue:   "Our catalogue has 13 robots across 4 categories:\n\n• **Humanoid** — PNDbotics ADAM (AUD 128K), Fourier GR-3 (148K), UniX AI Panther (88K), LimX OLI (58K)\n• **Quadruped** — MagicDog Y1 (110K), Genisom M1 (78K), MagicDog (18.5K), Genisom L1 (22K), Genisom L1 EDU (30K)\n• **Cleaning** — Gausium Phantas (48K), Keenon C40-P1 (32K)\n• **Industrial** — iSAGE STAR-SageMan (158K), Qisheng D2 (38K)\n\nAll prices are ex-works AUD. Scroll up to browse the full catalogue or ask me about a specific category.",
   pricing:     "Our robots range from AUD 18,500 (MagicDog education) to AUD 158,000 (iSAGE STAR-SageMan industrial). Most commercial deployments sit in the AUD 48K–110K range.\n\nEvery purchase includes site assessment, import compliance, customs, installation, staff training, and a 12-month support contract. Integration is quoted separately based on site complexity.\n\nWant a ballpark for your specific use case? Email robert@robotist.com.au.",
-  invest:      "Robotist is currently raising an angel round. We're actively deploying robots across multiple sectors in Australia with a growing pipeline of commercial clients.\n\nFor the full investor pack (financials, cap table, pitch deck), email **robert@robotist.com.au** — our CEO responds personally. The business plan is also accessible from this site if you'd like a read first.",
-  hospitality: "Humanoid robots are transforming hospitality globally — and Robotist makes deployment straightforward.\n\nOur humanoid stack:\n• **PNDbotics ADAM** — full-size humanoid for premium guest interaction and events (AUD 128K)\n• **Fourier GR-3** — care-centric humanoid with emotion AI for concierge and companion roles (AUD 148K)\n• **UniX AI Panther** — wheeled humanoid for domestic and service tasks (AUD 88K)\n• **LimX OLI** — research-grade bipedal humanoid for tech showcases (AUD 58K)\n\n8–12 week delivery from Shanghai. Interested? Email robert@robotist.com.au.",
+  invest:      "Robotist is currently raising an angel round. We've already secured our anchor client — Primus Hotel Shanghai — and deployment is underway.\n\nFor the full investor pack (financials, cap table, pitch deck), email **robert@robotist.com.au** — our CEO responds personally. The business plan is also accessible from this site if you'd like a read first.",
+  hospitality: "Humanoid robots are transforming hospitality globally — and we have real deployments to prove it. Primus Hotel Shanghai selected Robotist to deploy their first front-of-house robot.\n\nOur humanoid stack:\n• **PNDbotics ADAM** — full-size humanoid for premium guest interaction and events (AUD 128K)\n• **Fourier GR-3** — care-centric humanoid with emotion AI for concierge and companion roles (AUD 148K)\n• **UniX AI Panther** — wheeled humanoid for domestic and service tasks (AUD 88K)\n• **LimX OLI** — research-grade bipedal humanoid for tech showcases (AUD 58K)\n\n8–12 week delivery from Shanghai. Interested? Email robert@robotist.com.au.",
   logistics:   "Our quadruped and industrial robots handle inspection, security, and facility operations:\n\n• **MagicDog Y1** — industrial quadruped, 6 m/s, 45kg payload, security patrol and inspection (AUD 110K)\n• **Genisom M1** — heavy-duty quadruped for rough terrain and industrial inspection (AUD 78K)\n• **iSAGE STAR-SageMan** — quad-armed precision manufacturing and lab automation platform (AUD 158K)\n\nAll come with fleet management software and integrate with existing security and WMS systems.",
   security:    "Our security and inspection robots:\n\n• **MagicDog Y1** — industrial quadruped, 6 m/s patrol speed, 45kg payload, 360° situational awareness (AUD 110K)\n• **Genisom M1** — rugged quadruped for industrial and rough-terrain inspection (AUD 78K)\n\nBoth integrate with existing security management systems. Zero fatigue, zero sick days.",
   medical:     "Our healthcare humanoids deliver advanced care and companionship:\n\n• **Fourier GR-3** — 55-DOF care humanoid with AI emotion engine, micro-expression recognition, designed for hospitals and aged care (AUD 148K)\n• **iSAGE STAR-SageMan** — precision multi-arm platform for biopharma labs with ±0.03mm accuracy (AUD 158K)\n\nNote: clinical use in Australia may require TGA regulatory approval. Robotist can facilitate this as part of the integration package. Email lareesa@robotist.com.au to start that conversation.",
@@ -3897,7 +3939,7 @@ const responses = {
   compliance:  "Robotist handles all import compliance, customs clearance, and Australian regulatory requirements as part of every deployment. That includes:\n\n• ABF customs documentation\n• AS/NZS safety compliance assessment\n• State-specific workplace safety signoffs\n• TGA facilitation for medical robots\n\nYou focus on the use case — we handle the paperwork.",
   contact:     "Reach us here:\n\n• **Robert Vicencio (CEO)**: robert@robotist.com.au\n• **Lareesa Hu (CMO)**: lareesa@robotist.com.au\n• **LinkedIn**: linkedin.com/company/robotist\n\nOur Sydney-based team responds within 4 business hours. For urgent enquiries, email Robert directly.",
   services:    "Every Robotist deployment includes a structured after-sales package:\n\n**Tier 1 — Essential**: On-call support, 24h response, basic troubleshooting\n**Tier 2 — Priority**: 4–8h response, remote diagnostics, monthly check-in\n**Tier 3 — Premium Command**: Same-day response, direct priority line, performance reviews, supplier escalation handling\n\nScroll to the Services section to see the full comparison. All packages are quoted separately from the robot purchase.",
-  demo:        "We don't have a public showroom yet — but we do run private demonstrations for serious enquiries. If you're a business owner, operator, or investor who wants to see the machines in action, email robert@robotist.com.au to arrange a session.",
+  demo:        "We don't have a public showroom yet — but we do run private demonstrations for serious enquiries. If you're a business owner, operator, or investor who wants to see the machines in action, email robert@robotist.com.au to arrange a session.\n\nWe also have a live deployment in progress at Primus Hotel Shanghai — case study coming soon.",
   about:       "Robotist is Australia's precision robotics platform, founded in Sydney by **Robert Vicencio** and **Lareesa Hu**. Robert brings 21 years of China–Australia business experience; Lareesa is a neuro-branding strategist and serial entrepreneur.\n\nWe source directly from China's leading manufacturers — the same factories supplying Tesla and Amazon — and handle everything from import to go-live for Australian businesses.",
 };
 
@@ -4043,5 +4085,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 </script>
 
 </body>
-<!-- deploy: 2026-06-24 -->
 </html>
