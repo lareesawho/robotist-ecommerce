@@ -1,0 +1,16 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# Robotist — Render Blueprint
+# Every push to `main` on GitHub automatically triggers a fresh deploy here.
+# Pipeline: GitHub commit → Render detects push → re-deploys static site.
+# ══════════════════════════════════════════════════════════════════════════════
+version: "1"
+services:
+
+# ── Static site ───────────────────────────────────────────────────────────────
+- type: web
+  name: robotist
+  runtime: static
+  repo: https://github.com/lareesahu/robotist-ecommerce
+  branch: main
+  autoDeploy: true
+  staticPublishPath: .
