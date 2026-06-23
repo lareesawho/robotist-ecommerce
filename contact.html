@@ -824,6 +824,7 @@ img { max-width: 100%; height: auto; display: block; }
   .contact-hero-sub { font-size: 14px; }
 
   .contact-cards { padding: 48px var(--gutter) 12px; }
+  .contact-cards-inner { grid-template-columns: 1fr; }
   .contact-card { padding: 28px 20px; }
   .contact-card-name { font-size: 14px; }
   .contact-card-detail { font-size: 12px; }
@@ -939,7 +940,7 @@ img { max-width: 100%; height: auto; display: block; }
     <h2 class="inquiry-title reveal">Tell us what you're<br><em>looking for.</em></h2>
     <p class="inquiry-desc reveal">Share a few details and we'll get back to you with relevant options and pricing within one business day.</p>
 
-    <form class="inquiry-form reveal reveal-delay-2" action="https://formspree.io/f/robert@robotist.com.au" method="POST">
+    <form class="inquiry-form reveal reveal-delay-2" id="inquiry-form" onsubmit="return handleSubmit(event)">
       <div class="inquiry-row">
         <div class="inquiry-field">
           <label for="name">Name</label>
@@ -1077,6 +1078,43 @@ if (hamburger) {
       hamburger.classList.remove('active');
     });
   });
+}
+
+// ── Contact Form Submission Handler ──
+function handleSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  const btn = form.querySelector('button[type="submit"]');
+  const name = form.querySelector('#name').value.trim();
+  const email = form.querySelector('#email').value.trim();
+  const company = form.querySelector('#company').value.trim();
+  const interest = form.querySelector('#interest').value;
+  const message = form.querySelector('#message').value.trim();
+  
+  // Build mailto body
+  let body = `Name: ${name}%0D%0AEmail: ${email}`;
+  if (company) body += `%0D%0ACompany: ${company}`;
+  if (interest) body += `%0D%0AInterest: ${interest}`;
+  body += `%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+  
+  const subject = encodeURIComponent(`Robotist Inquiry from ${name}`);
+  const mailto = `mailto:robert@robotist.com.au?subject=${subject}&body=${body}`;
+  
+  // Visual feedback
+  btn.textContent = 'Opening Email Client...';
+  btn.style.pointerEvents = 'none';
+  btn.style.opacity = '0.7';
+  
+  // Show fallback in case mailto is blocked
+  setTimeout(() => {
+    btn.textContent = 'Send Inquiry';
+    btn.style.pointerEvents = 'auto';
+    btn.style.opacity = '1';
+    window.open(mailto, '_blank');
+  }, 300);
+  
+  window.location.href = mailto;
+  return false;
 }
 </script>
 
