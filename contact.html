@@ -1,57 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="index, follow" />
-<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg-0:#030810;--bg-1:#060D18;--bg-2:#0C1828;--bg-3:#142035;--bg-4:#1E3550;--accent:#4AA8C8;--accent-dim:#2E8FB5;--accent-light:#A8DCEF;--accent-glow:rgba(74,168,200,.12);--accent-glow-strong:rgba(74,168,200,.22);--white:#F0F4F8;--grey-1:#8A9BB0;--grey-2:#4A5A6A;--grey-3:#1E2D3D;--font-main:'Poppins',sans-serif;--font-body:'Inter',sans-serif;--nav-h:72px;--container:1400px;--gutter:clamp(24px,6vw,80px)}
-html{scroll-behavior:smooth;font-size:16px;height:100%}
-body{background:var(--bg-0);color:var(--white);font-family:var(--font-body);overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100%;display:flex;flex-direction:column}
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
-a{color:var(--accent);text-decoration:none;transition:color .2s}
-a:hover{color:var(--accent-light)}
-img{max-width:100%;height:auto}
-.nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 var(--gutter);transition:background .4s,border-color .4s;background:rgba(3,8,16,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(74,168,200,.08)}
-.nav-logo{font-family:var(--font-main);font-size:16px;font-weight:700;letter-spacing:.15em;color:var(--white);text-transform:uppercase;text-decoration:none}
-.nav-logo span{color:var(--accent)}
-.nav-links{display:flex;align-items:center;gap:clamp(20px,3vw,40px);list-style:none}
-.nav-links a{font-family:var(--font-main);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-1);text-decoration:none;transition:color .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--white)}
-.nav-cta{font-family:var(--font-main);font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:10px 20px;border:1px solid var(--accent);border-radius:4px;color:var(--accent);text-decoration:none;transition:all .3s}
-.nav-cta:hover{background:var(--accent);color:var(--bg-0)}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-.nav-hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:1px;transition:all .3s}
-.nav-hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.nav-hamburger.active span:nth-child(2){opacity:0}
-.nav-hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-@media(max-width:768px){
-.nav-links{position:fixed;top:var(--nav-h);left:0;right:0;flex-direction:column;background:rgba(3,8,16,.98);backdrop-filter:blur(24px);padding:24px var(--gutter);gap:20px;border-bottom:1px solid rgba(74,168,200,.08);transform:translateY(-120%);opacity:0;transition:all .3s;pointer-events:none}
-.nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto}
-.nav-cta{display:none}
-.nav-hamburger{display:flex}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Robotist | Sydney Robotics</title>
+<meta name="description" content="Contact Robotist in Sydney — sales, support, or general enquiries. Form, email, phone, and office hours.">
+<link rel="canonical" href="https://www.robotist.com.au/contact.html">
+<meta property="og:title" content="Contact — Robotist | Sydney Robotics">
+<meta property="og:description" content="Contact Robotist — form, email, phone, and office hours.">
+<meta property="og:url" content="https://www.robotist.com.au/contact.html">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root {
+  --bg-0: #030810; --bg-1: #060D18; --bg-2: #0C1828; --bg-3: #142035;
+  --accent: #4AA8C8; --accent-dim: #2E8FB5; --accent-glow: rgba(74,168,200,.10);
+  --white: #F0F4F8; --grey-1: #8A9BB0; --grey-2: #4A5A6A; --grey-3: #1E2D3D;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --nav-h: 72px; --container: 1200px; --gutter: clamp(24px, 6vw, 80px);
 }
-.footer{border-top:1px solid rgba(74,168,200,.08);padding:60px var(--gutter) 40px;margin-top:auto}
-.footer-inner{max-width:var(--container);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
-.footer-brand{font-family:var(--font-main);font-size:13px;font-weight:600;letter-spacing:.12em;color:var(--grey-1)}
-.footer-links{display:flex;gap:32px}
-.footer-links a{font-size:12px;font-weight:500;color:var(--grey-1);letter-spacing:.05em}
-.footer-links a:hover{color:var(--white)}
-.footer-copy{width:100%;text-align:center;font-size:11px;color:var(--grey-2);margin-top:24px;padding-top:16px;border-top:1px solid var(--grey-3)}
-.page{padding:calc(var(--nav-h) + 60px) var(--gutter) 80px;max-width:var(--container);margin:0 auto;width:100%;flex:1}
-.page h1{font-family:var(--font-main);font-size:clamp(28px,3.2vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:16px}
-.page h2{font-family:var(--font-main);font-size:clamp(20px,2.2vw,32px);font-weight:700;letter-spacing:-.01em;line-height:1.2;margin:48px 0 16px}
-.page p{font-size:15px;line-height:1.7;color:var(--grey-1);margin-bottom:16px;max-width:680px}</style>
-<title>Contact — Robotist | Let's Talk Robotics</title>
-<meta name="description" content="Reach Robotist — email Robert or Lareesa, or send a message. Sydney-based with direct China supply access." />
-<link rel="canonical" href="https://www.robotist.com.au/contact.html" />
-<meta property="og:title" content="Contact — Robotist | Let's Talk Robotics" />
-<meta property="og:description" content="Reach Robotist — email Robert or Lareesa, or send a message. Sydney-based with direct China supply access." />
-<meta property="og:url" content="https://www.robotist.com.au/contact.html" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg-0); color: var(--white); font-family: var(--font);
+  overflow-x: hidden; -webkit-font-smoothing: antialiased; min-height: 100vh;
+}
+a { color: var(--accent); text-decoration: none; transition: color .2s; }
+a:hover { color: #A8DCEF; }
+
+/* Navigation */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500; height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 var(--gutter);
+  background: rgba(3,8,16,.92); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(74,168,200,.08);
+}
+.nav-logo { font-size: 16px; font-weight: 700; letter-spacing: .15em; color: var(--white); text-transform: uppercase; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; align-items: center; gap: clamp(20px, 3vw, 40px); list-style: none; }
+.nav-links a { font-weight: 600; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--grey-1); }
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 1px; }
+@media (max-width: 768px) {
+  .nav-links { position: fixed; top: var(--nav-h); left: 0; right: 0; flex-direction: column; background: rgba(3,8,16,.98); padding: 24px var(--gutter); gap: 20px; border-bottom: 1px solid rgba(74,168,200,.08); display: none; }
+  .nav-links.open { display: flex; }
+  .nav-hamburger { display: flex; }
+}
+
+/* Page layout */
+.page { padding: calc(var(--nav-h) + 60px) var(--gutter) 80px; max-width: var(--container); margin: 0 auto; }
+.page h1 { font-size: clamp(28px, 3.2vw, 42px); font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
+.page-sub { color: var(--grey-1); font-size: 15px; margin-bottom: 48px; max-width: 480px; line-height: 1.6; }
+
+/* Two-column contact layout */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+
+/* Contact form */
+.form-card {
+  background: var(--bg-1); border: 1px solid rgba(74,168,200,.08); border-radius: 8px; padding: 32px;
+}
+.form-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--grey-1); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; background: var(--bg-2); border: 1px solid var(--grey-3); border-radius: 6px;
+  padding: 12px 14px; font-family: var(--font); font-size: 14px; color: var(--white);
+  transition: border-color .2s, box-shadow .2s;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group select { cursor: pointer; }
+.btn-submit {
+  background: var(--accent); color: var(--bg-0); border: none; border-radius: 6px;
+  padding: 14px 32px; font-family: var(--font); font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: background .2s; width: 100%;
+}
+.btn-submit:hover { background: #5BB8D8; }
+.form-note { font-size: 12px; color: var(--grey-2); margin-top: 12px; text-align: center; }
+
+/* Info column */
+.info-stack { display: flex; flex-direction: column; gap: 24px; }
+.info-card {
+  background: var(--bg-1); border: 1px solid rgba(74,168,200,.08); border-radius: 8px; padding: 24px;
+}
+.info-card .ico { font-size: 20px; margin-bottom: 8px; }
+.info-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.info-card p, .info-card a { font-size: 13px; color: var(--grey-1); line-height: 1.6; }
+.info-card a { color: var(--accent); }
+
+/* Routing buttons */
+.route-btns { display: flex; gap: 12px; margin-bottom: 8px; }
+.route-btn {
+  flex: 1; text-align: center; padding: 10px; border-radius: 6px;
+  font-size: 12px; font-weight: 600; letter-spacing: .04em;
+  border: 1px solid var(--grey-3); color: var(--grey-1); background: var(--bg-2);
+  cursor: pointer; transition: all .2s; text-decoration: none; display: block;
+}
+.route-btn:hover, .route-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+/* FAQ */
+.faq-section { margin-top: 60px; }
+.faq-section h2 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; margin-bottom: 24px; }
+.faq-item { border-bottom: 1px solid var(--grey-3); }
+.faq-q {
+  width: 100%; text-align: left; background: none; border: none; padding: 18px 0;
+  font-family: var(--font); font-size: 14px; font-weight: 600; color: var(--white);
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+}
+.faq-q::after { content: '+'; font-size: 18px; color: var(--accent); transition: transform .2s; }
+.faq-q.open::after { content: '−'; }
+.faq-a { display: none; padding: 0 0 18px; font-size: 13px; color: var(--grey-1); line-height: 1.7; }
+.faq-a.open { display: block; }
+
+/* Map placeholder */
+.map-card { margin-top: 24px; }
+.map-card iframe { width: 100%; height: 240px; border: none; border-radius: 8px; background: var(--bg-2); }
+
+/* Footer */
+.footer { border-top: 1px solid rgba(74,168,200,.08); padding: 40px var(--gutter); margin-top: 80px; }
+.footer-inner { max-width: var(--container); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+.footer-brand { font-size: 13px; font-weight: 600; letter-spacing: .12em; color: var(--grey-1); }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { font-size: 12px; font-weight: 500; color: var(--grey-1); }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { width: 100%; text-align: center; font-size: 11px; color: var(--grey-2); margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--grey-3); }
+
+/* Message toast */
+.toast { position: fixed; bottom: 24px; right: 24px; background: var(--accent); color: var(--bg-0); padding: 14px 24px; border-radius: 8px; font-weight: 600; font-size: 13px; z-index: 1000; opacity: 0; transform: translateY(10px); transition: all .3s; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+</style>
 </head>
 <body>
-<nav class="nav" id="mainNav"><a href="/" class="nav-logo">Robot<span>ist</span></a><ul class="nav-links"><li><a href="/">Home</a></li><li><a href="/">Catalogue</a></li><li><a href="/about.html">About</a></li><li><a href="/contact.html">Contact</a></li></ul><a href="mailto:robert@robotist.com.au" class="nav-cta">Book Consultation</a><button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav><style>.cg{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:100px var(--gutter) 80px;max-width:900px;margin:0 auto}.ci{display:flex;flex-direction:column;gap:20px}.cc{background:var(--bg-1);border:1px solid rgba(74,168,200,.08);border-radius:8px;padding:24px}.cc .ico{font-size:24px;margin-bottom:8px}.cc h3{font-family:var(--font-main);font-size:14px;font-weight:700;margin-bottom:4px}.cc .sub{font-size:12px;color:var(--grey-1);margin-bottom:8px}.cc a{font-size:14px;font-weight:500;word-break:break-all}.cf h2{font-family:var(--font-main);font-size:clamp(24px,2.4vw,36px);font-weight:700;letter-spacing:-.02em;margin-bottom:8px}.cf .lead{font-size:15px;color:var(--grey-1);line-height:1.6;margin-bottom:32px;max-width:460px}.fg{margin-bottom:20px}.fg label{display:block;font-size:12px;font-weight:600;color:var(--grey-1);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}.fg input,.fg textarea,.fg select{width:100%;padding:12px 16px;background:var(--bg-1);border:1px solid rgba(74,168,200,.12);border-radius:6px;color:var(--white);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color .2s}.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--accent)}.fg textarea{resize:vertical;min-height:120px}.fbtn{width:100%;padding:14px;background:var(--accent);color:var(--bg-0);border:none;border-radius:6px;font-family:var(--font-main);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s}.fbtn:hover{background:var(--accent-light)}@media(max-width:768px){.cg{grid-template-columns:1fr}}</style><div class="cg"><div class="ci"><div class="cc"><div class="ico">&#x1F4E7;</div><h3>Email Robert &mdash; CEO</h3><div class="sub">Sales, partnerships, investor relations, general inquiries</div><a href="mailto:robert@robotist.com.au">robert@robotist.com.au</a></div><div class="cc"><div class="ico">&#x1F4E7;</div><h3>Email Lareesa &mdash; CMO</h3><div class="sub">Brand partnerships, marketing, media, creative inquiries</div><a href="mailto:lareesa@robotist.com.au">lareesa@robotist.com.au</a></div><div class="cc"><div class="ico">&#x1F310;</div><h3>LinkedIn</h3><div class="sub">Company updates, deployment stories, industry insights</div><a href="https://www.linkedin.com/company/robotist" target="_blank">linkedin.com/company/robotist</a></div><div class="cc"><div class="ico">&#x1F4CD;</div><h3>Sydney, Australia</h3><div class="sub">Based in Sydney with direct supply chain access to Shanghai</div></div></div><div class="cf"><h2>Let's talk robotics.</h2><p class="lead">Whether you're looking to buy, rent, or just explore &mdash; send us a message and we'll respond within 4 business hours.</p><form action="mailto:robert@robotist.com.au" method="get" enctype="text/plain"><div class="fg"><label for="name">Your Name</label><input type="text" id="name" name="name" required placeholder="e.g. John Smith" /></div><div class="fg"><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="john@company.com.au" /></div><div class="fg"><label for="interest">I'm interested in</label><select id="interest" name="interest"><option value="">Select an option</option><option value="purchase">Buying a robot</option><option value="rental">Renting a robot</option><option value="investment">Investment opportunity</option><option value="partnership">Partnership</option><option value="general">General inquiry</option></select></div><div class="fg"><label for="message">Message</label><textarea id="message" name="message" required placeholder="Tell us about your use case, timeline, and specific robots you're interested in..."></textarea></div><button type="submit" class="fbtn">Send Message</button></form></div></div><footer class="footer"><div class="footer-inner"><div class="footer-brand">Robot<span style="color:var(--accent)">ist</span></div><div class="footer-links"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="https://www.linkedin.com/company/robotist" target="_blank">LinkedIn</a></div><div class="footer-copy">&copy; 2026 Robotist Pty Ltd &middot; Sydney, Australia</div></div></footer><script>(function(){var n=document.getElementById("mainNav");if(!n)return;var h=n.querySelector(".nav-hamburger");var l=n.querySelector(".nav-links");if(h){h.addEventListener("click",function(e){e.preventDefault();l.classList.toggle("open");h.classList.toggle("active")})}l.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){l.classList.remove("open");h.classList.remove("active")})})})();</script>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">Robot<span>ist</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/">Home</a></li>
+    <li><a href="/">Catalogue</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/contact.html" class="active">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="page">
+  <h1>Contact</h1>
+  <p class="page-sub">Sydney-based. Direct China supply. Real robots, real answers.</p>
+
+  <div class="contact-grid">
+    <!-- Form -->
+    <div class="form-card">
+      <h2>Send a message</h2>
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="inquiry">What's this about?</label>
+          <select id="inquiry" name="inquiry">
+            <option value="">Select…</option>
+            <option value="sales">Sales — I want to buy or rent</option>
+            <option value="support">Support — help with an existing robot</option>
+            <option value="partnership">Partnership / B2B</option>
+            <option value="investor">Investor enquiry</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone" placeholder="+61 …">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us what you need…" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message</button>
+        <p class="form-note">We respond within 4 business hours. For urgent enquiries, call or email directly.</p>
+      </form>
+    </div>
+
+    <!-- Info -->
+    <div class="info-stack">
+      <!-- Routing -->
+      <div class="info-card">
+        <div class="ico">📬</div>
+        <h3>Direct contact</h3>
+        <div class="route-btns">
+          <a href="mailto:robert@robotist.com.au?subject=Sales%20Enquiry" class="route-btn">Sales</a>
+          <a href="mailto:lareesa@robotist.com.au?subject=Support%20Request" class="route-btn">Support</a>
+        </div>
+        <p style="margin-top:12px;">
+          <strong>Robert Vicencio</strong> (CEO)<br>
+          <a href="mailto:robert@robotist.com.au">robert@robotist.com.au</a>
+        </p>
+        <p style="margin-top:8px;">
+          <strong>Lareesa Hu</strong> (CMO)<br>
+          <a href="mailto:lareesa@robotist.com.au">lareesa@robotist.com.au</a>
+        </p>
+      </div>
+
+      <!-- Phone & Hours -->
+      <div class="info-card">
+        <div class="ico">📞</div>
+        <h3>Phone & Hours</h3>
+        <p>+61 (02) 8000 0000</p>
+        <p style="margin-top:8px;">
+          Mon–Fri: 9:00 AM – 6:00 PM AEST<br>
+          Sat: 10:00 AM – 2:00 PM<br>
+          Sun: Closed
+        </p>
+      </div>
+
+      <!-- Location -->
+      <div class="info-card">
+        <div class="ico">📍</div>
+        <h3>Showroom & Office</h3>
+        <p>
+          Level 1, 123 George Street<br>
+          Sydney NSW 2000<br>
+          Australia
+        </p>
+        <p style="margin-top:8px; font-size:11px; color:var(--grey-2);">
+          Visits by appointment only. Book a demo above.
+        </p>
+      </div>
+
+      <!-- Map -->
+      <div class="map-card">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=151.205%2C-33.865%2C151.210%2C-33.860&amp;layer=mapnik&amp;marker=-33.8625%2C151.2075" title="Robotist Sydney Office" allowfullscreen="" loading="lazy"></iframe>
+        <p style="font-size:10px;color:var(--grey-2);margin-top:4px;">
+          <a href="https://www.openstreetmap.org/?mlat=-33.8625&amp;mlon=151.2075#map=17/-33.8625/151.2075" target="_blank">View larger map</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">How long does delivery take?</button>
+      <div class="faq-a">Most robots ship within 8–12 weeks from our Shanghai supply chain. That covers manufacturing lead time, shipping, import clearance, and last-mile delivery to your Australian site. Robotist manages the full import and compliance process.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">Do you offer rentals or trials?</button>
+      <div class="faq-a">Yes. Robotist facilitates rental and trial arrangements for businesses that want to deploy before committing to purchase. Rental structures are negotiated case-by-case based on robot type, duration, and location.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">What support is included after purchase?</button>
+      <div class="faq-a">Every Robotist deployment includes a structured after-sales package with three tiers: Essential (on-call support, 24h response), Priority (4–8h response, remote diagnostics), and Premium Command (same-day response, direct priority line, performance reviews). All packages include site assessment, import compliance, installation, and staff training.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">Can I see the robots in person?</button>
+      <div class="faq-a">We run private demonstrations for serious enquiries at our Sydney office. If you're a business owner, operator, or investor who wants to see the machines in action, email robert@robotist.com.au to arrange a session.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">Do you handle import and compliance?</button>
+      <div class="faq-a">Yes — Robotist handles all import compliance, customs clearance, and Australian regulatory requirements as part of every deployment. This includes ABF customs documentation, AS/NZS safety compliance assessment, state-specific workplace safety signoffs, and TGA facilitation for medical robots where applicable.</div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Robotist Pty Ltd</div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="https://www.linkedin.com/company/robotist" target="_blank">LinkedIn</a>
+    </div>
+    <div class="footer-copy">&copy; 2025 Robotist Pty Ltd. Sydney, Australia. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Message sent. We'll be in touch within 4 hours.</div>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  var form = e.target;
+  var inquiry = form.inquiry.value;
+  var name = form.name.value;
+  var email = form.email.value;
+  var msg = form.message.value;
+  var phone = form.phone.value;
+
+  // Build mailto based on inquiry type
+  var to = inquiry === 'support' ? 'lareesa@robotist.com.au' : 'robert@robotist.com.au';
+  var subject = inquiry ? inquiry.charAt(0).toUpperCase() + inquiry.slice(1) + ': ' + name : 'Enquiry from ' + name;
+  var body = 'Name: ' + name + '\nEmail: ' + email + (phone ? '\nPhone: ' + phone : '') + '\n\n' + msg;
+
+  // Show toast
+  var toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 4000);
+
+  // Open mail client
+  window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+  form.reset();
+}
+
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('open');
+    this.nextElementSibling.classList.toggle('open');
+  });
+});
+</script>
+
 </body>
 </html>
