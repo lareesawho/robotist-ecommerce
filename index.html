@@ -1072,6 +1072,15 @@ body::after {
   .robot-card:hover { transform: scale(1.02); z-index: 10; }
 }
 
+/* Touch devices: show overlay name/detail always since hover doesn't work */
+@media (hover: none) and (pointer: coarse) {
+  .robot-overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(3, 8, 16, 0.92) 0%, rgba(3, 8, 16, 0.4) 55%, transparent 95%);
+  }
+  .robot-overlay-desc { display: block; }
+}
+
 /* ALL cards: uniform image treatment — no robot looks tiny or off-center */
 .robot-card-img-wrap {
   position: relative;
