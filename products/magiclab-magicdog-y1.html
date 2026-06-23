@@ -676,6 +676,8 @@ body::after {
 }
 
 @media (max-width: 640px) {
+  .nav-cta { display: none; }
+  .nav-links.open .nav-cta { display: inline-block; margin-top: 8px; }
   :root { --gutter: 20px; --section-pad: 80px; }
 
   .product-hero { padding: 60px var(--gutter) 40px; }
