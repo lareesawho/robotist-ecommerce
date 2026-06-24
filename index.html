@@ -810,12 +810,7 @@ body::after {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  transform: scale(1.1);
-  transition: transform 8s linear;
-}
-
-.scenario-slide.active .scenario-bg { transform: scale(1); }
+  object-fit: cover;
 
 .scenario-overlay {
   position: absolute;
@@ -885,27 +880,31 @@ body::after {
 }
 
 .nav-btn {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
   color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.3s;
+  transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
   backdrop-filter: blur(10px);
-  font-size: 1.5rem;
-  font-weight: 300;
+}
+
+.nav-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
 .nav-btn:hover {
-  background: var(--accent);
+  background: rgba(74, 168, 200, 0.15);
   border-color: var(--accent);
-  color: var(--bg-0);
-  transform: scale(1.1);
+  color: var(--accent);
+  box-shadow: 0 0 24px rgba(74, 168, 200, 0.12);
+  transform: scale(1.08);
 }
 
 .slider-dots {
@@ -2043,8 +2042,8 @@ body::after {
 .leader-img-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center top;
+  object-fit: cover;
+  object-position: center 20%;
   display: block;
   transition: transform 0.7s ease;
 }
@@ -3445,8 +3444,8 @@ id="catalogue">
       </div>
 
       <div class="slider-nav">
-        <button class="nav-btn prev" aria-label="Previous Slide">←</button>
-        <button class="nav-btn next" aria-label="Next Slide">→</button>
+        <button class="nav-btn prev" aria-label="Previous Slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 4 7 12 15 20"/></svg></button>
+        <button class="nav-btn next" aria-label="Next Slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 4 17 12 9 20"/></svg></button>
       </div>
     </div>
   </div>
@@ -3864,31 +3863,22 @@ filterPills.forEach(pill => {
     pill.classList.add('active');
     const filter = pill.dataset.filter;
 
-    if (filter === 'all') {
-      // Restore editorial layout
-      if (catalogueFeatured) catalogueFeatured.style.display = 'grid';
-      if (catalogueMid) catalogueMid.style.display = 'grid';
-      if (robotGrid) robotGrid.style.display = 'grid';
-      robotCards.forEach(card => { card.style.display = 'block'; card.style.opacity = '1'; });
-    } else {
-      // Filtered: collapse featured/mid rows, show only matching in flat grid
-      if (catalogueFeatured) catalogueFeatured.style.display = 'none';
-      if (catalogueMid) catalogueMid.style.display = 'none';
-      if (robotGrid) {
-        robotGrid.style.display = 'grid';
-        robotGrid.style.gridTemplateColumns = 'repeat(5, 1fr)';
-      }
-      // Move all matching cards into the grid view temporarily
-      robotCards.forEach(card => {
+    // Always show all rows — never collapse featured/mid
+    if (catalogueFeatured) catalogueFeatured.style.display = 'grid';
+    if (catalogueMid) catalogueMid.style.display = 'grid';
+    if (robotGrid) robotGrid.style.display = 'grid';
+
+    robotCards.forEach(card => {
+      if (filter === 'all') {
+        card.style.display = '';
+        card.style.opacity = '1';
+      } else {
         const categories = (card.dataset.category || '').split(' ');
         const show = categories.includes(filter);
-        card.style.display = show ? 'block' : 'none';
+        card.style.display = show ? '' : 'none';
         card.style.opacity = show ? '1' : '0';
-        if (show && !robotGrid.contains(card)) {
-          robotGrid.appendChild(card);
-        }
-      });
-    }
+      }
+    });
   });
 });
 
