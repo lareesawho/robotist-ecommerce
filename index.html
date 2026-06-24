@@ -2840,6 +2840,89 @@ body::after {
   .why-card { padding: 28px 20px; }
 }
 
+/* ── How Deployment Works ── */
+.deploy-section {
+  background: var(--bg-1);
+  padding: var(--section-pad) var(--gutter);
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(74,168,200,0.06);
+}
+.deploy-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.deploy-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.deploy-title {
+  font-family: var(--font-main);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  line-height: 1.15;
+  margin-top: 12px;
+}
+.deploy-intro {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--grey-1);
+  margin-top: 16px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.65;
+}
+.deploy-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--grey-3);
+  border: 1px solid var(--grey-3);
+}
+.deploy-step {
+  background: var(--bg-1);
+  padding: 44px 36px;
+  transition: background 0.2s;
+}
+.deploy-step:hover { background: var(--bg-2); }
+.deploy-num {
+  font-family: var(--font-main);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 16px;
+}
+.deploy-step h4 {
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.deploy-step p {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--grey-1);
+  line-height: 1.7;
+}
+@media (max-width: 900px) {
+  .deploy-steps { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .deploy-steps { grid-template-columns: 1fr; }
+  .deploy-step { padding: 32px 24px; }
+  .deploy-header { margin-bottom: 48px; }
+}
+
 /* Inquiry CTA section */
 .inquiry-cta-section {
   background: var(--bg-0);
@@ -3350,8 +3433,8 @@ id="catalogue">
           <h3 class="scenario-title">Smart Vertical Farming</h3>
           <p class="scenario-desc">Autonomous monitoring and harvesting systems optimized for high-yield indoor environments. Reducing labor costs while increasing crop precision.</p>
           <div class="scenario-stats">
-            <div class="stat-item"><span class="stat-val">40%</span><span class="stat-label">Yield Increase</span></div>
-            <div class="stat-item"><span class="stat-val">24/7</span><span class="stat-label">Operation</span></div>
+            <div class="stat-item"><span class="stat-label">Crop monitoring</span></div>
+                        <div class="stat-item"><span class="stat-label">Labor-light inspection</span></div>
           </div>
         </div>
       </div>
@@ -3365,8 +3448,8 @@ id="catalogue">
           <h3 class="scenario-title">Autonomous Surveillance</h3>
           <p class="scenario-desc">High-precision patrol units equipped with 360° LiDAR and thermal imaging for corporate lobbies and industrial facilities.</p>
           <div class="scenario-stats">
-            <div class="stat-item"><span class="stat-val">100%</span><span class="stat-label">Coverage</span></div>
-            <div class="stat-item"><span class="stat-val">0ms</span><span class="stat-label">Response Lag</span></div>
+            <div class="stat-item"><span class="stat-label">Patrol route automation</span></div>
+                        <div class="stat-item"><span class="stat-label">Real-time monitoring workflows</span></div>
           </div>
         </div>
       </div>
@@ -3380,8 +3463,8 @@ id="catalogue">
           <h3 class="scenario-title">Elevated Guest Service</h3>
           <p class="scenario-desc">AI-powered concierge and room service delivery robots that redefine the luxury guest experience in premium hotels.</p>
           <div class="scenario-stats">
-            <div class="stat-item"><span class="stat-val">98%</span><span class="stat-label">Guest Satisfaction</span></div>
-            <div class="stat-item"><span class="stat-val">3x</span><span class="stat-label">Efficiency</span></div>
+            <div class="stat-item"><span class="stat-label">Guest engagement use case</span></div>
+                        <div class="stat-item"><span class="stat-label">Staff-support workflow</span></div>
           </div>
         </div>
       </div>
@@ -3395,8 +3478,8 @@ id="catalogue">
           <h3 class="scenario-title">Precision Facility Care</h3>
           <p class="scenario-desc">Industrial-grade cleaning robots designed for high-traffic environments like airports and shopping centers. Consistent, verifiable results.</p>
           <div class="scenario-stats">
-            <div class="stat-item"><span class="stat-val">60%</span><span class="stat-label">Water Saving</span></div>
-            <div class="stat-item"><span class="stat-val">Auto</span><span class="stat-label">Charging</span></div>
+            <div class="stat-item"><span class="stat-label">Verifiable cleaning logs</span></div>
+                        <div class="stat-item"><span class="stat-label">Autonomous operation</span></div>
           </div>
         </div>
       </div>
@@ -3457,7 +3540,7 @@ id="catalogue">
     <div class="why-header">
       <div class="reveal">
         <div class="section-eyebrow">Our Advantage</div>
-        <h2 class="why-title">Why the world's<br/>best choose Robotist.</h2>
+        <h2 class="why-title">Why early Australian<br/>robotics buyers work with Robotist.</h2>
       </div>
       <p class="why-intro reveal reveal-delay-1">
         We are not a marketplace. We are a precision instrument for Australian businesses navigating the robotics transition — with the supply chain access, technical depth, and commercial relationships that others cannot replicate.
@@ -3472,7 +3555,7 @@ id="catalogue">
         </div>
         <h3 class="why-card-title">Direct China Supply Access</h3>
         <div class="why-divider"></div>
-        <p class="why-card-body">We source directly from the same factories supplying Tesla, Amazon, and global tier-one operators. No intermediaries. No markup layers. Machines at cost-plus, not retail-plus.</p>
+        <p class="why-card-body">We work through source-side manufacturing networks connected to global robotics and automation supply chains. Direct factory relationships. Cost-plus pricing. No unnecessary intermediaries.</p>
       </div>
 
       <div class="why-card reveal reveal-delay-1">
@@ -3492,7 +3575,7 @@ id="catalogue">
         </div>
         <h3 class="why-card-title">Australian-First Curation</h3>
         <div class="why-divider"></div>
-        <p class="why-card-body">Every robot in our catalogue has been assessed for Australian regulatory compliance, workplace safety standards, and real-world deployment readiness. We only carry machines we'd stake our reputation on.</p>
+        <p class="why-card-body">Every deployment is reviewed against Australian site, safety, import, and operational requirements before quote confirmation. We only carry machines we'd stake our reputation on.</p>
       </div>
     </div>
   </div>
@@ -3611,6 +3694,51 @@ id="catalogue">
           <li>Escalation handling with supplier</li>
         </ul>
         <a href="mailto:robert@robotist.com.au" class="btn-ghost">Get a quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     HOW DEPLOYMENT WORKS
+     ══════════════════════════════════════════════ -->
+<section class="deploy-section">
+  <div class="deploy-inner">
+    <div class="deploy-header reveal">
+      <div class="section-eyebrow">Buyer Journey</div>
+      <h2 class="deploy-title">How deployment works</h2>
+      <p class="deploy-intro">A clear process from first inquiry to operational robot — managed end-to-end by our Sydney team.</p>
+    </div>
+    <div class="deploy-steps">
+      <div class="deploy-step reveal">
+        <span class="deploy-num">01</span>
+        <h4>Tell us your site and use case</h4>
+        <p>Share your operational environment, goals, and any constraints. We'll ask the right questions to narrow the field.</p>
+      </div>
+      <div class="deploy-step reveal reveal-delay-1">
+        <span class="deploy-num">02</span>
+        <h4>We shortlist suitable robots</h4>
+        <p>Based on your requirements, we recommend 2–3 machines with clear trade-offs across capability, cost, and deployment complexity.</p>
+      </div>
+      <div class="deploy-step reveal reveal-delay-2">
+        <span class="deploy-num">03</span>
+        <h4>We verify supplier specs and availability</h4>
+        <p>Direct factory confirmation of specifications, lead times, and configuration options — no third-party reseller guesswork.</p>
+      </div>
+      <div class="deploy-step reveal reveal-delay-3">
+        <span class="deploy-num">04</span>
+        <h4>We assess compliance and deployment requirements</h4>
+        <p>Site, safety, import, and operational review before any commitment. You know what's needed before you sign.</p>
+      </div>
+      <div class="deploy-step reveal reveal-delay-4">
+        <span class="deploy-num">05</span>
+        <h4>You receive quote, timeline, and support plan</h4>
+        <p>Fixed-price quote with clear line items, delivery timeline, and your selected support tier. No surprises.</p>
+      </div>
+      <div class="deploy-step reveal reveal-delay-5">
+        <span class="deploy-num">06</span>
+        <h4>We coordinate import, setup, training, and maintenance</h4>
+        <p>From factory floor to your site — customs clearance, physical installation, staff training, and 12-month support included.</p>
       </div>
     </div>
   </div>
@@ -3937,7 +4065,7 @@ const responses = {
   contact:     "Reach us here:\n\n• **Robert Vicencio (CEO)**: robert@robotist.com.au\n• **Lareesa Hu (CMO)**: lareesa@robotist.com.au\n• **LinkedIn**: linkedin.com/company/robotist\n\nOur Sydney-based team responds within 4 business hours. For urgent enquiries, email Robert directly.",
   services:    "Every Robotist deployment includes a structured after-sales package:\n\n**Tier 1 — Essential**: On-call support, 24h response, basic troubleshooting\n**Tier 2 — Priority**: 4–8h response, remote diagnostics, monthly check-in\n**Tier 3 — Premium Command**: Same-day response, direct priority line, performance reviews, supplier escalation handling\n\nScroll to the Services section to see the full comparison. All packages are quoted separately from the robot purchase.",
   demo:        "We don't have a public showroom yet — but we do run private demonstrations for serious enquiries. If you're a business owner, operator, or investor who wants to see the machines in action, email robert@robotist.com.au to arrange a session.\n\nWe also have a live deployment in progress at Primus Hotel Shanghai — case study coming soon.",
-  about:       "Robotist is Australia's precision robotics platform, founded in Sydney by **Robert Vicencio** and **Lareesa Hu**. Robert brings 21 years of China–Australia business experience; Lareesa is a neuro-branding strategist and serial entrepreneur.\n\nWe source directly from China's leading manufacturers — the same factories supplying Tesla and Amazon — and handle everything from import to go-live for Australian businesses.",
+  about:       "Robotist is Australia's precision robotics platform, founded in Sydney by **Robert Vicencio** and **Lareesa Hu**. Robert brings 21 years of China–Australia business experience; Lareesa is a neuro-branding strategist and serial entrepreneur.\n\nWe source directly from China's leading manufacturers — source-side manufacturing networks — and handle everything from import to go-live for Australian businesses.",
 };
 
 // Varied off-topic fallbacks — picked randomly to feel natural
