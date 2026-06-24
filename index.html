@@ -426,7 +426,7 @@ body::after {
 .hero-h1 {
   font-family: var(--font-main);
   font-size: clamp(40px, 4.8vw, 76px);
-  font-weight: 300;
+  font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--white);
@@ -448,7 +448,7 @@ body::after {
 }
 
 .hero-h1 .line-2-fixed {
-  font-weight: 300;
+  font-weight: 600;
   color: var(--grey-1);
 }
 
@@ -850,6 +850,7 @@ body::after {
 .scenario-title {
   font-family: var(--font-main);
   font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 20px;
   line-height: 1.1;
@@ -873,39 +874,43 @@ body::after {
 
 .slider-nav {
   position: absolute;
-  bottom: 40px;
-  right: 60px;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
   z-index: 30;
   display: flex;
-  gap: 16px;
+  justify-content: space-between;
+  padding: 0 clamp(12px, 3vw, 32px);
+  pointer-events: none;
 }
 
 .nav-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.03);
-  color: var(--white);
+  width: 36px;
+  height: 36px;
+  border-radius: 0;
+  border: none;
+  background: none;
+  color: rgba(255,255,255,0.55);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-  backdrop-filter: blur(10px);
+  transition: color 0.3s, transform 0.3s;
+  pointer-events: auto;
 }
 
 .nav-btn svg {
-  width: 20px;
-  height: 20px;
+  width: 6px;
+  height: 10px;
 }
 
 .nav-btn:hover {
-  background: rgba(74, 168, 200, 0.15);
-  border-color: var(--accent);
+  background: none;
+  border: none;
   color: var(--accent);
-  box-shadow: 0 0 24px rgba(74, 168, 200, 0.12);
-  transform: scale(1.08);
+  box-shadow: none;
+  transform: scale(1.25);
 }
 
 .slider-dots {
@@ -936,13 +941,13 @@ body::after {
 /* Responsive Optimization for Scenarios */
 @media (max-width: 1100px) {
   .scenario-content { padding: 40px; }
-  .slider-nav { right: 40px; bottom: 30px; }
 }
 
 @media (max-width: 900px) {
   .scenario-slider { height: clamp(420px, 60vw, 560px); }
   .scenario-content { padding: 32px 28px; }
   .scenario-stats { flex-wrap: wrap; gap: 20px; }
+  .slider-nav { padding: 0 16px; }
 }
 
 @media (max-width: 640px) {
@@ -951,16 +956,8 @@ body::after {
   .scenario-slider { height: clamp(480px, 90vw, 560px); }
   .scenario-content { padding: 24px 20px; }
   .scenario-stats { justify-content: flex-start; flex-wrap: wrap; gap: 16px; }
-  .slider-nav {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    justify-content: center;
-    background: var(--bg-1);
-    padding: 20px 0;
-    border-top: 1px solid var(--grey-3);
-  }
-  .slider-dots { bottom: 68px; }
+  .slider-nav { padding: 0 10px; }
+  .slider-dots { bottom: 24px; }
   .scenario-title { font-size: clamp(1.4rem, 6vw, 2rem); }
   .scenario-desc { font-size: 0.9rem; }
   .stat-val { font-size: 1.2rem; }
@@ -2785,9 +2782,9 @@ body::after {
   .hero-sub { font-size: 13px; display: none; } /* hide sub on mobile to keep it clean */
   .hero-stats { flex-wrap: wrap; gap: 16px; margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(74,168,200,0.12); }
   .hero-stat-num { font-size: 20px; }
-  .hero-actions { flex-direction: row; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
-  .btn-primary { padding: 14px 24px; font-size: 10px; }
-  .btn-text { font-size: 10px; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 10px; margin-top: 20px; }
+  .btn-primary { padding: 14px 24px; font-size: 10px; text-align: center; }
+  .btn-text { font-size: 10px; text-align: center; }
 
   /* Robot grid — 2 columns on mobile */
   .catalogue-featured { grid-template-columns: 1fr; } /* stack featured on mobile */
